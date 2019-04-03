@@ -1,0 +1,218 @@
+<!--
+  https://github.com/sampotts/plyr
+  https://animejs.com/documentation
+-->
+<html>
+
+<head>
+  <title>Code Challenge: You Gotta Make a Movie</title>
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.5.2/plyr.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Scripts -->
+  <script src="https://cdn.plyr.io/3.5.2/plyr.js"></script>
+  <script src="anim.min.js"></script>
+</head>
+
+<body>
+  <div id="player_wrapper">
+    <video id="player" src="../../scenes/israel.mp4" controls></video>
+
+    <!-- Your Scene -->
+    <div id="canvas">
+      <img id="rick" src="assets/liran.png" />
+    </div>
+  </div>
+
+  <script>
+    var rickFrames = [{
+      "height": 150,
+      "rotate": 0,
+      "translateX": -50,
+      "translateY": 300.5,
+      "duration": 1000,
+      "minute": 0
+    },
+      {
+        "height": 150,
+        "rotate": 0,
+        "translateX": 200,
+        "translateY": 300.5,
+        "duration": 6000,
+        "minute": 1000
+      },
+      {
+        "translateX": 100,
+        "translateY": 250.5,
+        "duration": 500,
+        "minute": 6500
+      },{
+      "height": 0,
+      "translateX": 460.5,
+      "translateY": 283.5,
+      "duration": 4000,
+      "minute": 7000
+    }, {
+      "height": 180,
+      "translateX": 450.5,
+      "translateY": 283.5,
+      "duration": 500,
+      "minute": 11000
+    }, ];
+    var rickHeight = 140;
+    var rickWidth = 120;
+
+
+    var rickAnimation = {
+      targets: '#rick',
+      opacity: [
+        {
+          value: 0,
+          duration: 0
+        },
+        {
+          value: 0,
+          duration: 1000
+        },
+        {
+          duration: 0
+        },
+        {
+          value: 1,
+          duration: 6000
+        },
+        {
+          value: 0,
+          duration: 0
+        },
+        {
+          duration: 4000
+        },
+        {
+          value: 1,
+          duration: 5000
+        },
+        {
+          value: 0,
+        },
+      ],
+      height: rickFrames.map(function (point, idx) {
+        var obj = {
+           duration: point.duration || (idx ? 50 : 0)
+        };
+
+        if (point.height) {
+          obj.value = point.height;
+        }
+
+        return obj;
+      }),
+      translateX: rickFrames.map(function (point, idx) {
+        var obj = {
+           duration: point.duration || (idx ? 50 : 0)
+        };
+
+        if (point.translateX) {
+          obj.value = point.translateX - (rickWidth / 1.5);
+        }
+
+        return obj;
+      }),
+      translateY: rickFrames.map(function (point, idx) {
+        var obj = {
+          duration: point.duration || (idx ? 50 : 0)
+        };
+
+        if (point.translateY) {
+          obj.value = point.translateY - (rickHeight / 1.5);
+        }
+
+        return obj;
+      }),
+      rotate: rickFrames.map(function (point, idx) {
+        var obj = {
+          duration: point.duration || (idx ? 50 : 0)
+        };
+
+        if (point.rotate) {
+          obj.value = point.rotate;
+        }
+
+        return obj;
+      }),
+    };
+
+
+    var rickTl = anime.timeline({
+      duration: 20000,
+      easing: 'linear',
+      autoplay: false,
+    }).add(rickAnimation);
+
+
+    var firstPlay = true;
+    var videoPlayer = new Plyr('#player', {
+      controls: ['play', 'play-large', 'progress', 'current-time', 'mute', 'volume'], // 'fullscreen'
+      // debug: true,
+      keyboard: {
+        focused: true,
+        global: true
+      },
+      storage: {
+        enabled: false
+      },
+      volume: 0,
+      seekTime: 0.5,
+      invertTime: false
+    });
+
+
+    videoPlayer.on('play', event => {
+      rickTl.play();
+      duration = Date.now();
+      if (firstPlay) {
+        firstPlay = false;
+      }
+    });
+
+    videoPlayer.on('pause', event => {
+      rickTl.pause();
+      console.log('Paused at: ', videoPlayer.currentTime * 1000);
+    });
+
+    videoPlayer.on('seeking', event => {
+      rickTl.seek(videoPlayer.currentTime * 1000);
+    });
+
+    videoPlayer.on('seeked', event => {
+      console.log('Paused at: ', videoPlayer.currentTime * 1000);
+    });
+
+    // My Code
+    var canvas = document.getElementById('canvas');
+    var points = [];
+    var duration = player.currentTime * 1000;
+
+    canvas.addEventListener('click', function (e) {
+      var bounding = canvas.getBoundingClientRect();
+      var now = player.currentTime * 1000;
+      if (now < 0) {
+        now = 0;
+      }
+
+      points.push({
+        translateX: e.pageX - bounding.x,
+        translateY: e.pageY - bounding.y,
+        duration: now - duration,
+        minute: now
+      });
+
+      duration = now;
+
+      console.log('points', JSON.stringify(points));
+    });
+  </script>
+</body>
+
+</html>
