@@ -110,3 +110,7 @@ video {
 .owl .arms .arm.arm-r.password {
   transform: translateX(-40px) translateY(-40px) scaleX(-1);
 }
+
+video {
+  width:100%;
+}
