@@ -1,0 +1,77 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background: #062874 url(assets/bg.png) repeat top center;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+#player_wrapper {
+  box-shadow: 0 0 1px 20px #002271;
+  background: #000;
+  border-radius: 100%;
+  top: 180px;
+  position: absolute;
+}
+
+#canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(100% - 90px);
+}
+
+#canvas > * {
+  position: absolute;
+}
+
+#rick {
+  transform-origin: 0 0;
+  border-radius: 100%;
+}
+
+#morty {
+  transform-origin: 50% 50%;
+}
+
+#IconBar {
+  position: absolute;
+  top: 10px;
+}
+
+.icon {
+  cursor: pointer;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+}
+
+.icon:hover {
+  box-shadow: 5px 5px 5px gray;
+}
+
+#yglf {
+  position: absolute;
+  bottom: -100px;
+  height: 250px;
+  width: 100%;
+}
+
+#brain {
+  position: absolute;
+  bottom: 0px;
+  height: 100px;
+  left: 180px;
+  width: 100px;
+}
