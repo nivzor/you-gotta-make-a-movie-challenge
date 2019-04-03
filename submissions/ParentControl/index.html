@@ -22,12 +22,10 @@
       <div>
           <video id="heroVideo" width="600"  controls>
               <source src="../../scenes/hero.mp4" type="video/mp4">
-            <video>
-              
+            </video>
       </div>
-      
-    </main>
-  </body>
+  </main>
+
   <script>
     const owlEl = document.querySelector(".owl");
       // Get the <video> element with id="myVideo"
@@ -46,13 +44,23 @@
       owlEl.classList.remove("hidden");
       owlEl.classList.add("visible");
     };
-<<<<<<< HEAD
     vid.onpause = function() {
-=======
-    video.onpause = function() {
       owlEl.classList.remove("visible");
->>>>>>> feat: added animation
       owlEl.classList.add("hidden");
     }
   </script>
+
+    const owl = document.querySelectorAll(".owl *");
+    const vid = document.getElementById("heroVideo");
+
+    vid.ontimeupdate = (e)=> {
+      if(e.timeStamp >= 5000 && e.timeStamp < 15000){
+        owl.forEach(el => el.classList.add("password"));
+      } else {
+        owl.forEach(el => el.classList.remove("password"));
+      }
+    };
+
+  </script>
+  </body>
 </html>
