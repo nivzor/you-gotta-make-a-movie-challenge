@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+
+<body>
+    <table border="0">
+        <tr>
+            <td>
+                <video id="video" height="640" height="480" src="../../scenes/starwars.mp4"></video>
+                <br />
+                <button id="play" type="button">play</button>
+                <button id="pause" type="button">stop</button>
+
+                <div class="lightsaber"></div>
+            </td>
+            <td>
+                <div style="display: flex; align-items: center;">
+                    <div class="obiwan"></div>
+                    <div id="obi_score">1000</div>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <div class="darth">
+                    </div>
+                    <div id="darth_score">1000</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+    <script>
+        window.onload = () => {
+            const video = document.querySelector('#video');
+            const playBtn = document.querySelector('#play');
+            const pauseBtn = document.querySelector('#pause');
+            const lightsaber = document.querySelector('.lightsaber');
+            const obiScore = document.querySelector('#obi_score');
+            const darthScore = document.querySelector('#darth_score');
+
+            let threshhold = 0;
+            let movementDirection = '';
+            let previosposition = null;
+            let timeout;
+            playBtn.onclick = () => {
+
+                video.play();
+                window.onmousemove = (e) => {
+                    if (timeout) {
+                        clearTimeout(timeout);
+                    }
+                    timeout = setTimeout(() => {
+                        console.log('stop');
+
+                        lightsaber.classList.remove('left', 'right');
+                        lightsaber.classList.add(movementDirection);
+
+                        const math = Math.round(Math.random());
+
+                        if (math === 0) {
+                            obiScore.innerHTML = (+obiScore.innerHTML) - 1;
+                        } else {
+                            darthScore.innerHTML = (+darthScore.innerHTML) - 1;
+                        }
+                    }, 10);
+                    lightsaber.style.left = `${e.clientX - 12.5}px`;
+                    lightsaber.style.top = `${e.clientY - 360}px`;
+
+                    if (!previosposition) {
+                        previosposition = e.clientX;
+                        return;
+                    }
+
+                    if (previosposition - e.clientX < 0) {
+                        movementDirection = 'right';
+                    } else if (previosposition - e.clientX > 0) {
+                        movementDirection = 'left';
+                    }
+
+                    previosposition = e.clientX;
+
+                    console.log(movementDirection);
+                }
+            }
+
+            pauseBtn.onclick = () => {
+                video.pause();
+            }
+        }
+    </script>
+</body>
+
+</html>
