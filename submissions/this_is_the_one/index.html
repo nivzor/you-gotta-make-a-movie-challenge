@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Jscii</title>
+    <script src="jscii/src/jscii.js"></script>
+    <style type="text/css">
+    html,
+    body {
+        font: normal 12px/18px 'helvetica neue'arial;
+        color: #333;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+    }
+
+    .section>pre {
+        font: bold 8px/5px monospace;
+        color: #000;
+        clear: left;
+    }
+
+    video {
+        width: 200px;
+    }
+
+    .clearfix:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+    }
+
+    .clearfix {
+        display: inline-block;
+    }
+
+    #ascii-container-video {
+        transition: all 0.5s;
+    }
+
+    .hide-me {
+        display: none;
+    }
+	.morph {
+		position: relative;
+		top:0;
+	}
+    .the-one {
+        color: #000000;
+        background: #21ff41;
+    }
+
+    .image-teaser {
+        width: 100%;
+        background: url(scene/pills.jpeg);
+    }
+	.moprh {
+		position: relative;
+
+	}
+    .morph #play-video {
+     position: absolute;
+     background: transparent;
+    z-index: 100;
+    width: 200px;
+    height: 150px;
+    bottom: 120px;
+    left: 220px;
+    border:none;
+    }
+.morph #pause-video {
+     position: absolute;
+     background: transparent;
+    z-index: 100;
+    width: 200px;
+    height: 150px;
+    bottom: 120px;
+    right: 220px;
+        border:none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="section clearfix">
+            <div class="hide-me">
+                <video id="jscii-element-video" width="150" height="112" controls loop>
+                    <source src="scene/matrix.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+                    Your browser does not support video
+                </video>
+            </div>
+            <div class="morph">
+                <button id="play-video"></button>
+                <button id="pause-video"></button>
+                <img src="scene/pills.jpeg" alt="">
+            </div>
+            <pre id="ascii-container-video"></pre>
+        </div>
+    </div>
+    <script>
+    // example using normal video element
+    var videoJscii = new Jscii({
+        container: document.getElementById('ascii-container-video'),
+        el: document.getElementById('jscii-element-video')
+    });
+
+    
+    document.getElementById('play-video').addEventListener('click', function() {
+    document.getElementById('jscii-element-video').play();	
+     videoJscii.play(); 
+document.querySelector('.morph').classList += ' hide-me';
+     setTimeout(function(){
+     	document.getElementById('ascii-container-video').classList += ' the-one';
+     	setTimeout(function(){
+     		document.getElementById('ascii-container-video').classList.remove('the-one');
+     	},4000)
+     },13000)
+ });
+    document.getElementById('pause-video').addEventListener('click', function() { videoJscii.pause(); });
+
+
+
+    </script>
+</body>
+
+</html>
