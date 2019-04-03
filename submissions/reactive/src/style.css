@@ -1,0 +1,88 @@
+@keyframes overlay {
+  30% {
+    left: 0;
+    width: 50%;
+  }
+  50% {
+    background: #00f;
+  }
+  80% {
+    left: 80%;
+    width: 20%;
+  }
+  100% {
+    left: 60%;
+    width: 40%;
+    background: #00f;
+  }
+}
+body {
+  text-align: center;
+}
+figure#fashion {
+  display: inline-block;
+  position: relative;
+  font-size: 0;
+  margin: 0;
+}
+
+figure#fashion video {
+  width: 100%;
+}
+
+figure#fashion div {
+  width: 10%;
+  height: 100%;
+  background: #f00;
+  position: absolute;
+  top: 0;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  left: 0;
+}
+
+video.playing ~ div#vid-cover {
+  animation: overlay 10s forwards;
+}
+
+figure#fashion video.playing ~ figcaption {
+  opacity: 1;
+}
+
+figure#fashion figcaption {
+  font-size: 50px;
+  font-family: Avenir;
+  color: white;
+  position: absolute;
+  width: 40%;
+  right: 0;
+  top: 30%;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0;
+  transition: 3s 9s opacity;
+}
+
+figure#fashion figcaption span {
+  font-size: 40px;
+  text-transform: lowercase;
+  display: block;
+}
+button { 
+  display: block;
+  margin: 0 auto; 
+  font-size: 1.2rem;
+}
+
+#ia{
+  position: absolute;
+  top:10px;
+  left:30%;
+  z-index: 10;
+}
+
+#ib{
+  position: absolute;
+  top:50%;
+  left:60%;
+}
