@@ -22,22 +22,23 @@
       <div>
           <video id="heroVideo" width="600"  controls>
               <source src="../../scenes/hero.mp4" type="video/mp4">
-            <video>
-              
+            </video>
       </div>
-      
-    </main>
-  </body>
+  </main>
+
   <script>
-      // Get the <video> element with id="myVideo"
-      var vid = document.getElementById("heroVideo");
-  
-      // Assign an ontimeupdate event to the <video> element, and execute a function if the current playback position has changed
-      vid.ontimeupdate = function() {myFunction()};
-  
-      function myFunction() {
-        // Display the current position of the video in a <p> element with id="demo"
-        document.getElementById("currentTime").innerHTML = vid.currentTime;
+
+    const owl = document.querySelectorAll(".owl *");
+    const vid = document.getElementById("heroVideo");
+
+    vid.ontimeupdate = (e)=> {
+      if(e.timeStamp >= 5000 && e.timeStamp < 15000){
+        owl.forEach(el => el.classList.add("password"));
+      } else {
+        owl.forEach(el => el.classList.remove("password"));
       }
-    </script>
+    };
+
+  </script>
+  </body>
 </html>

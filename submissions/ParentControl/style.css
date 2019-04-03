@@ -11,6 +11,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  background: cadetblue;
 }
 
 main {
@@ -30,6 +31,7 @@ main div {
   height: 108px;
   background-image: url("https://dash.readme.io/img/owl-login.png");
   position: relative;
+  top:10px;
 }
 .owl .hand {
   width: 34px;
