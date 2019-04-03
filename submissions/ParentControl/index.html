@@ -44,8 +44,14 @@
       vid.onplay = function() {
       console.log("play");
       owlEl.classList.remove("hidden");
+      owlEl.classList.add("visible");
     };
+<<<<<<< HEAD
     vid.onpause = function() {
+=======
+    video.onpause = function() {
+      owlEl.classList.remove("visible");
+>>>>>>> feat: added animation
       owlEl.classList.add("hidden");
     }
   </script>

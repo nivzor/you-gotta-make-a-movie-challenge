@@ -23,9 +23,36 @@ main {
 main div {
   align-self: center;
 }
+video {
+  z-index: 100;
+}
+
+@keyframes hide {
+  from {
+    visibility: visible;
+  }
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes show {
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
+}
 
 .hidden {
   visibility: hidden;
+  animation-name: hide;
+  animation-duration: 500ms;
+}
+.visible {
+  animation-name: show;
+  animation-duration: 500ms;
 }
 
 .owl {
