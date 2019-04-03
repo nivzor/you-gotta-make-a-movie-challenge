@@ -1,0 +1,87 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-image: url('movie/bg.jpg');
+            background-size: 100%;
+        }
+        .player-container img {
+            margin-top:100px;
+            border: 6px dashed white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player-container">
+        <image id="movie-placeholder" />
+    </div>
+    <audio id="movie-sound" src="movie/audio.mp3" preload="auto"  />
+  <script>
+      const movieImages = [];
+      function generateImages() {
+          const MAX_IMAGES = 200;
+          for (let i = 1; i < MAX_IMAGES; i++) {
+              movieImages.push(`movie/${i}.png`);
+          }
+      }
+      generateImages();
+      let loadedCount = 0;
+      const images = new Array()
+			function preload(_images) {
+				for (i = 0; i < _images.length; i++) {
+					images[i] = new Image();
+                    images[i].src = _images[i];
+                    images[i].onload = loaded;
+				}
+            }
+            
+            function loaded() {
+                loadedCount++;
+                if (loadedCount === movieImages.length) {
+                    startMovie();
+                    startAudio();
+                }
+            }
+
+            preload(
+				movieImages
+			);
+
+            const moviePlaceholder = document.getElementById('movie-placeholder');
+            const MOVIE_FPS = 10;
+            let movieLoopInterval;
+
+            function startAudio() {
+                const movieSound = document.getElementById('movie-sound');
+                movieSound.play();
+            }
+            function startMovie() {
+                let currentFrame = 0;
+                movieLoopInterval = setInterval(() => {
+                    if (currentFrame === movieImages.length) {
+                        clearInterval(movieLoopInterval);
+                    } else {
+                        setImage(movieImages[currentFrame++]);
+                    }
+                }, 1000 / MOVIE_FPS);
+            }
+
+            function setImage(imageSrc) {
+                moviePlaceholder.src = imageSrc;
+            }
+
+			
+  </script>
+</body>
+</html>
