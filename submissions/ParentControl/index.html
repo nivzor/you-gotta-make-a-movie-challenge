@@ -10,7 +10,7 @@
   <body>
     <main>
         <div id="currentTime"></div>
-      <div class="owl">
+      <div class="owl hidden">
         <div class="hand"></div>
         <div class="hand hand-r"></div>
         <div class="arms">
@@ -29,6 +29,7 @@
     </main>
   </body>
   <script>
+    const owlEl = document.querySelector(".owl");
       // Get the <video> element with id="myVideo"
       var vid = document.getElementById("heroVideo");
   
@@ -39,5 +40,13 @@
         // Display the current position of the video in a <p> element with id="demo"
         document.getElementById("currentTime").innerHTML = vid.currentTime;
       }
-    </script>
+  
+      vid.onplay = function() {
+      console.log("play");
+      owlEl.classList.remove("hidden");
+    };
+    vid.onpause = function() {
+      owlEl.classList.add("hidden");
+    }
+  </script>
 </html>

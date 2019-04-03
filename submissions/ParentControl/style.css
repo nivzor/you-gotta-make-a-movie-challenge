@@ -24,6 +24,10 @@ main div {
   align-self: center;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .owl {
   margin: auto;
   width: 211px;
