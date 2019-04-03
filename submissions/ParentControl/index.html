@@ -9,6 +9,7 @@
   </head>
   <body>
     <main>
+        <div id="currentTime"></div>
       <div class="owl">
         <div class="hand"></div>
         <div class="hand hand-r"></div>
@@ -19,10 +20,24 @@
       </div>
 
       <div>
-        <video width="600" controls>
-          <source src="../../scenes/hero.mp4" type="video/mp4" />
-        </video>
+          <video id="heroVideo" width="600"  controls>
+              <source src="../../scenes/hero.mp4" type="video/mp4">
+            <video>
+              
       </div>
+      
     </main>
   </body>
+  <script>
+      // Get the <video> element with id="myVideo"
+      var vid = document.getElementById("heroVideo");
+  
+      // Assign an ontimeupdate event to the <video> element, and execute a function if the current playback position has changed
+      vid.ontimeupdate = function() {myFunction()};
+  
+      function myFunction() {
+        // Display the current position of the video in a <p> element with id="demo"
+        document.getElementById("currentTime").innerHTML = vid.currentTime;
+      }
+    </script>
 </html>
