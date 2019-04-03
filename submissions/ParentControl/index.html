@@ -9,7 +9,7 @@
   </head>
   <body>
     <main>
-        <div id="currentTime"></div>
+      <div id="currentTime"></div>
       <div class="owl hidden">
         <div class="hand"></div>
         <div class="hand hand-r"></div>
@@ -20,47 +20,46 @@
       </div>
 
       <div>
-          <video id="heroVideo" width="600"  controls>
-              <source src="../../scenes/hero.mp4" type="video/mp4">
-            </video>
+        <video id="heroVideo" width="600" controls>
+          <source src="../../scenes/hero.mp4" type="video/mp4" />
+        </video>
       </div>
-  </main>
+    </main>
 
-  <script>
-    const owlEl = document.querySelector(".owl");
+    <script>
+      const owlEl = document.querySelector(".owl");
       // Get the <video> element with id="myVideo"
       var vid = document.getElementById("heroVideo");
-  
+
       // Assign an ontimeupdate event to the <video> element, and execute a function if the current playback position has changed
-      vid.ontimeupdate = function() {myFunction()};
-  
+      vid.ontimeupdate = function() {
+        myFunction();
+      };
+
       function myFunction() {
         // Display the current position of the video in a <p> element with id="demo"
         document.getElementById("currentTime").innerHTML = vid.currentTime;
       }
-  
+
       vid.onplay = function() {
-      console.log("play");
-      owlEl.classList.remove("hidden");
-      owlEl.classList.add("visible");
-    };
-    vid.onpause = function() {
-      owlEl.classList.remove("visible");
-      owlEl.classList.add("hidden");
-    }
-  </script>
+        console.log("play");
+        owlEl.classList.remove("hidden");
+        owlEl.classList.add("visible");
+      };
+      vid.onpause = function() {
+        owlEl.classList.remove("visible");
+        owlEl.classList.add("hidden");
+      };
 
-    const owl = document.querySelectorAll(".owl *");
-    const vid = document.getElementById("heroVideo");
+      const owl = document.querySelectorAll(".owl *");
 
-    vid.ontimeupdate = (e)=> {
-      if(e.timeStamp >= 5000 && e.timeStamp < 15000){
-        owl.forEach(el => el.classList.add("password"));
-      } else {
-        owl.forEach(el => el.classList.remove("password"));
-      }
-    };
-
-  </script>
+      vid.ontimeupdate = e => {
+        if (e.timeStamp >= 5000 && e.timeStamp < 15000) {
+          owl.forEach(el => el.classList.add("password"));
+        } else {
+          owl.forEach(el => el.classList.remove("password"));
+        }
+      };
+    </script>
   </body>
 </html>
