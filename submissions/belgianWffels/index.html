@@ -1,0 +1,111 @@
+<!--
+  https://github.com/sampotts/plyr
+  https://animejs.com/documentation
+-->
+<html>
+
+<head>
+  <title>Code Challenge: You Gotta Make a Movie</title>
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.5.2/plyr.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Scripts -->
+  <script src="https://cdn.plyr.io/3.5.2/plyr.js"></script>
+  <script src="anim.min.js"></script>
+</head>
+
+<body>
+  <div id="player_wrapper">
+    
+    <img class="glasses" src="assets/glasses.png"/>
+    <video id="player" src="assets/israel.mp4" controls="false"></video>
+    <audio id="sound_player" src="assets/sound.mp3" controls></audio>
+  </div>
+
+  <script>
+    var firstPlay = true;
+    var videoPlayer = new Plyr('#player', {
+      controls: [], // 'fullscreen'
+      // debug: true,
+      keyboard: {
+        focused: true,
+        global: true
+      },
+      storage: {
+        enabled: false
+      },
+      volume: 100,
+      seekTime: 0.5,
+      invertTime: false
+    });
+
+    var soundPlayer = new Plyr('#sound_player', {
+      controls: [],
+      // debug: true,
+      keyboard: {
+        focused: false,
+        global: false
+      },
+      storage: {
+        enabled: false
+      },
+      volume: 100,
+      seekTime: 0.5
+    });
+
+    videoPlayer.on('play', event => {
+      duration = Date.now();
+     
+    if (firstPlay) {
+        firstPlay = false;
+        setTimeout(() => {
+          videoPlayer.pause();
+          soundPlayer.play();
+          const glasses = document.getElementsByClassName('glasses');
+          glasses[0].className += " animation";
+        }, 15620);
+      }
+    });
+
+    // videoPlayer.on('pause', event => {
+
+    //   soundPlayer.pause();
+    //   console.log('Paused at: ', videoPlayer.currentTime * 1000);
+    // });
+
+    // videoPlayer.on('seeking', event => {
+    //   soundPlayer.currentTime = videoPlayer.currentTime;
+    // });
+
+    // videoPlayer.on('seeked', event => {
+    //   console.log('Paused at: ', videoPlayer.currentTime * 1000);
+    // });
+
+    // My Code
+    var canvas = document.getElementById('canvas');
+    var points = [];
+    var duration = player.currentTime * 1000;
+
+    canvas.addEventListener('click', function (e) {
+      var bounding = canvas.getBoundingClientRect();
+      var now = player.currentTime * 1000;
+      if (now < 0) {
+        now = 0;
+      }
+
+      points.push({
+        translateX: e.pageX - bounding.x,
+        translateY: e.pageY - bounding.y,
+        duration: now - duration,
+        minute: now
+      });
+
+      duration = now;
+
+      console.log('points', JSON.stringify(points));
+    });
+  </script>
+</body>
+
+</html>
