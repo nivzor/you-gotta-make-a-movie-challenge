@@ -1,0 +1,75 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<div class="main-wrapper">
+    <video class="main-vid">
+        <source src="scenes/starwars.mp4" type="video/mp4">
+    </video>
+    <div class="big-vid-wrapper">
+        <video class="big-vid">
+            <source src="scenes/israel.mp4" type="video/mp4">
+        </video>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    let bigWidth;
+    let mainWidth = 800;
+    document.documentElement.style.setProperty('--main-width', mainWidth + "px");
+    setVideoZoom(mainWidth * 2);
+    let bigWrapper = document.querySelector('.big-vid-wrapper');
+    let bigVid = document.querySelector('.big-vid')
+    let mainVid = document.querySelector('.main-vid')
+
+    function setVideoZoom(zoomSize) {
+        bigWidth = zoomSize;
+        document.documentElement.style.setProperty('--big-width', bigWidth + "px");
+    }
+
+    function play() {
+        bigVid.play();
+        mainVid.play();
+        document.documentElement.removeEventListener('click', play);
+    }
+
+
+
+    document.documentElement.addEventListener('click', play);
+
+    function init() {
+        const mainVidRect = mainVid.getBoundingClientRect();
+        document.addEventListener('mousemove', function(e){
+            const X = e.clientX - mainVidRect.x,
+                Y = e.clientY - mainVidRect.y,
+                delta = 150;
+
+            bigWrapper.style.left = X-delta + 'px';
+            bigWrapper.style.top = Y-delta + 'px';
+            bigVid.style.left = -((X*(bigWidth / mainWidth)) - delta) + 'px';
+            bigVid.style.top = -((Y*(bigWidth / mainWidth)) - delta) + 'px';
+        })
+
+
+    }
+
+
+
+
+
+    init();
+
+
+</script>
+</body>
+
+</html>
